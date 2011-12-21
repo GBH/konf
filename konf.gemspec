@@ -5,22 +5,26 @@
 
 Gem::Specification.new do |s|
   s.name = "konf"
-  s.version = "0.0.0"
+  s.version = "0.0.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Oleg Khabarov"]
-  s.date = "2011-12-20"
+  s.date = "2011-12-21"
   s.description = "minimalistic configuration reader"
   s.email = "oleg@khabarov.ca"
   s.extra_rdoc_files = [
+    "LICENSE",
     "README.md"
   ]
   s.files = [
     "Gemfile",
+    "LICENSE",
     "README.md",
     "Rakefile",
     "VERSION",
+    "konf.gemspec",
     "lib/konf.rb",
+    "test/config.yml",
     "test/konf_test.rb"
   ]
   s.homepage = "http://github.com/GBH/konf"
