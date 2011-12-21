@@ -1,0 +1,6 @@
+conf_a:
+  conf_1: value
+  conf_2: value <%= 1 + 1 %>
+      
+conf_b:
+  conf_1: value
