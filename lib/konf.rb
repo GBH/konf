@@ -2,14 +2,19 @@ require 'yaml'
 require 'erb'
 
 class Konf < Hash
-  class NotFound < StandardError; end
+  class NotFound  < StandardError; end
+  class Invalid   < StandardError; end
   
   def initialize(source, root = nil)
     hash = case source
     when Hash
       source
     else
-      YAML.load(ERB.new(File.read(source)).result).to_hash
+      if File.exists?(source.to_s) && yaml = YAML.load(ERB.new(File.read(source.to_s)).result)
+        yaml.to_hash
+      else
+        raise Invalid, "Invalid configuration input: #{source}"
+      end
     end
     if root
       hash = hash[root] or raise NotFound, "No configuration found for '#{root}'"

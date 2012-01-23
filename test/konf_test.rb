@@ -21,6 +21,16 @@ class KonfTest < Test::Unit::TestCase
     }), conf
   end
   
+  def test_initialization_as_invalid
+    [nil, 99, 'invalid.yml', File.expand_path('blank_config.yml', File.dirname(__FILE__))].each do |source|
+      begin
+        Konf.new(source)
+      rescue => e
+        assert_equal Konf::Invalid, e.class, e.inspect
+      end
+    end
+  end
+  
   def test_initialization_with_root
     conf = Konf.new({'a' => {'b' => 'c'}}, 'a')
     assert_equal ({'b' => 'c'}), conf
@@ -31,14 +41,6 @@ class KonfTest < Test::Unit::TestCase
       conf = Konf.new
     rescue => e
       assert_equal ArgumentError, e.class
-    end
-  end
-  
-  def test_initialization_with_invalid_file
-    begin
-      conf = Konf.new('invalid')
-    rescue => e
-      assert_equal Errno::ENOENT, e.class
     end
   end
   
